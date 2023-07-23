@@ -42,6 +42,41 @@ to memorize my instruction to build a Erigon + Lighthouse archive node on Window
   turn on "prometheus-service" on the task manager -> services
 
 ### 1-2. Grafana
-Open this Json file in grafana dashboard
-[Erigon Json Importer](https://github.com/ledgerwatch/erigon/blob/devel/cmd/prometheus/dashboards/erigon.json)
 
+- install grafana on this website
+[grafana installation link](https://grafana.com/grafana/download?pg=get&plcmt=selfmanaged-box1-cta1&platform=windows)
+
+- Open this Json file in grafana dashboard
+[Erigon Json Import](https://github.com/ledgerwatch/erigon/blob/devel/cmd/prometheus/dashboards/erigon.json)
+
+---
+## 2. Lighthouse
+
+- Before doing this, need to know the dependencies
+```
+choco install make llvm protoc
+choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System'
+(Rust install)
+```
+
+### 2-1.
+- Build
+  ```
+  # start fom ~/
+  cd ~
+  
+  git clone https://github.com/sigp/lighthouse.git
+  cd lighthouse
+
+  git checkout stable
+
+  # Build with this!
+  $env:PROFILE = "maxperf"; make
+
+
+  # Run
+  ```lighthouse bn --network mainnet --execution-endpoint http://localhost:8551 --execution-jwt $HOME\data\jwt.hex --checkpoint-sync-url https://mainnet.checkpoint.sigp.io --disable-deposit-contract-sync --datadir $HOME\data\lighthouse_data```
+
+
+### 2-2
+  
